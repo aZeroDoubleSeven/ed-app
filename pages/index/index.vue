@@ -27,7 +27,9 @@
       </view>
       <view class="btn-wrap">
         <view class="test-log">测试报告</view>
-        <view class="test-quick">快速测试</view>
+        <view class="test-quick" @click="toPage('/pages/quick/quick')"
+          >快速测试</view
+        >
       </view>
     </view>
 
@@ -80,7 +82,15 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    toPage(url) {
+      if (url) {
+        uni.navigateTo({
+          url: url,
+        });
+      }
+    },
+  },
 };
 </script>
 
