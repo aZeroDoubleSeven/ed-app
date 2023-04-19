@@ -26,6 +26,13 @@
 			"navigationStyle": "custom"
 		}
 
+	}, {
+		"path": "pages/monosyllable/monosyllable",
+		"style": {
+			"titleNView": "",
+			"navigationStyle": "custom"
+		}
+
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
