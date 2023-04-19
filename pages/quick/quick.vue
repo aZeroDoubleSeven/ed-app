@@ -1,6 +1,6 @@
 <template>
   <view>
-    <u-navbar :title="title" :safeAreaInsetTop="false">
+    <u-navbar :title="title" :safeAreaInsetTop="true" placeholder fixed>
       <view @click="onBack" class="u-nav-slot" slot="left">
         <u-icon name="arrow-left" size="19"></u-icon>
       </view>
@@ -60,7 +60,9 @@
 
     <view class="options-btn-wrap">
       <view class="trues">全真测试</view>
-      <view class="quick">快速测试</view>
+      <view class="quick" @click="toPage('/pages/monosyllable/monosyllable')"
+        >快速测试</view
+      >
     </view>
 
     <!-- <u-modal
@@ -132,6 +134,13 @@ export default {
     };
   },
   methods: {
+    toPage(url) {
+      if (url) {
+        uni.navigateTo({
+          url: url,
+        });
+      }
+    },
     open() {
       this.show = true;
     },

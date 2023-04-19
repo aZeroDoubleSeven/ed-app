@@ -1,6 +1,6 @@
 <template>
   <view>
-    <u-navbar title="单音节测试题" :safeAreaInsetTop="false">
+    <u-navbar title="单音节测试题" :safeAreaInsetTop="true" placeholder fixed>
       <view @click="onBack" class="u-nav-slot" slot="left">
         <u-icon name="arrow-left" size="19"></u-icon>
       </view>
