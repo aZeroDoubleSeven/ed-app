@@ -1,27 +1,48 @@
 <template>
   <view>
-    <u-navbar title="单音节测试题" :safeAreaInsetTop="true" placeholder fixed>
+    <u-navbar title="命题说话" :safeAreaInsetTop="true" placeholder fixed>
       <view @click="onBack" class="u-nav-slot" slot="left">
         <u-icon name="arrow-left" size="19"></u-icon>
       </view>
     </u-navbar>
     <view class="container">
-      <view class="examination-wrap">
-        <view class="section monosyllable">
-          <view class="monosyllable-content">
-            <view class="b" v-for="i in monosyllableList">
-              <view class="w">{{ i }}</view>
+      <view class="examination-wrap titles">
+        <view class="box option" v-if="step === 0">
+          <view class="top">选择其中一个题目进行3分钟自由对话</view>
+          <view class="opt-wrap">
+            <view
+              class="item"
+              @click="onSelect(item)"
+              v-for="(item, index) in titlesList"
+              >{{ index + 1 }}. {{ item }}
+              <u-icon class="icons" name="arrow-right"></u-icon>
             </view>
           </view>
         </view>
-
-        <view class="tip">大声清晰朗读能活得更精准的分数哦</view>
+        <view class="box result" v-if="step === 1">
+          <view class="top"> 请开始3分钟自由说话 </view>
+          <view class="res">《{{ currentTitle }}》</view>
+        </view>
+        <view class="tip">
+          <view style="margin-bottom: 20rpx">答题指南:</view>
+          <view
+            >1.答题开头建议为：<text style="color: #fe5f57"
+              >我说话的题目是××</text
+            ></view
+          >
+          <view>2.请说满3分钟，如果有效时长过短会影响分数</view>
+          <view>3.注意保持音量适中，音量过小可能会影响分数</view>
+        </view>
       </view>
     </view>
 
     <view class="voice-wrap">
       <view class="count-down">
-        <u-count-down :time="2 * 60 * 1000" format="mm:ss"></u-count-down>
+        <u-count-down
+          v-if="step === 1"
+          :time="3 * 60 * 1000"
+          format="mm:ss"
+        ></u-count-down>
       </view>
 
       <view class="voice-btn" @click="onRecord">
@@ -29,7 +50,12 @@
         <text v-if="!showVoiceUi">开始录制</text>
       </view>
 
-      <view class="submit-btn" @click="onSubmit">提交</view>
+      <view
+        class="submit-btn"
+        :class="[step === 0 ? 'disabled' : '']"
+        @click="onSubmit"
+        >提交</view
+      >
     </view>
 
     <popup :show="show" @close="close" />
@@ -47,18 +73,26 @@ import popup from "../../components/popup.vue";
 export default {
   data() {
     return {
+      step: 0,
       showVoiceUi: false,
       show: false,
       model: "test",
       voicePath: "",
-      monosyllableList:
-        "的去太天涯是啊从弹出层容器用于展示弹窗信息提示等内容支持上下左右和中部弹出组件只提供容器内部内容由用户自定义吧你吗啊是的发给和",
+      currentTitle: "",
+      titlesList: ["我的学习生活", "难忘的旅行"],
     };
   },
   components: { voiceui, popup },
   methods: {
     onSubmit() {
-      this.toPage("/pages/multisyllable/multisyllable");
+      if (this.step === 1) {
+        this.toPage("/pages/multisyllable/multisyllable");
+      }
+    },
+
+    onSelect(title) {
+      this.currentTitle = title;
+      this.step = 1;
     },
     toPage(url) {
       if (url) {
@@ -127,48 +161,78 @@ export default {
 .container {
   position: relative;
   margin-top: 40rpx;
-  padding: 0 28rpx;
+  padding: 0 56rpx;
   .examination-wrap {
-    .section {
-      margin-bottom: 50rpx;
-      .title {
-        color: #444444;
-        font-size: 32rpx;
-        height: 32rpx;
-        line-height: 32rpx;
-        margin-bottom: 32rpx;
-      }
-    }
-    .monosyllable-content {
-      box-sizing: border-box;
-      padding: 0 12rpx;
-      position: relative;
-      width: 100%;
-      height: auto;
-      display: flex;
-      flex-wrap: wrap;
-      .b {
-        width: 66rpx;
-        height: 66rpx;
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1rpx solid #999999;
-        margin: -1rpx;
-      }
-      .w {
-        color: #444444;
-        font-size: 28rpx;
+    margin-bottom: 50rpx;
+
+    .tip {
+      text-align: left;
+      view {
+        color: #999999;
+        line-height: 24rpx;
+        height: 24rpx;
+        font-size: 24rpx;
+        margin-bottom: 14rpx;
       }
     }
 
-    .tip {
-      text-align: center;
-      color: #999999;
-      line-height: 20rpx;
-      height: 20rpx;
-      font-size: 20rpx;
+    .box {
+      position: relative;
+      margin-bottom: 50rpx;
+      .top {
+        line-height: 32rpx;
+        font-size: 32rpx;
+        height: 32rpx;
+        margin-bottom: 39rpx;
+        color: #444444;
+      }
+    }
+
+    .option {
+      .opt-wrap {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        .item {
+          position: relative;
+          box-sizing: border-box;
+          width: 100%;
+          height: 72rpx;
+          border-radius: 20rpx;
+          line-height: 72rpx;
+          font-size: 32rpx;
+          padding: 0 20rpx;
+          text-align: left;
+          margin-bottom: 24rpx;
+          color: #ffffff;
+          background-color: #1d74fb;
+          &:last-child {
+            margin-bottom: 0rpx;
+          }
+
+          &:active {
+            background-color: #024cbf;
+          }
+
+          /deep/ .icons {
+            position: absolute;
+            right: 30rpx;
+            transform: translateY(-50rpx);
+            .u-icon__icon {
+              color: #ffffff !important;
+            }
+          }
+        }
+      }
+    }
+
+    .result {
+      .res {
+        height: 32rpx;
+        line-height: 32rpx;
+        font-size: 32rpx;
+        color: #444444;
+      }
     }
   }
 }
@@ -219,6 +283,14 @@ export default {
     &:active {
       color: #ffffff;
       background: #024cbf;
+    }
+  }
+
+  .disabled {
+    background-color: #999999 !important ;
+    &:active {
+      color: #ffffff;
+      background: #999999 !important;
     }
   }
 }

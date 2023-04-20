@@ -1,76 +1,100 @@
 {
-	"pages": [{
-		"path": "pages/index/index",
-		"style": {
-			"titleNView": "",
-			"navigationStyle": "custom"
-		}
-	}, {
-		"path": "pages/login/login",
-		"style": {
-			"titleNView": "",
-			"navigationStyle": "custom"
-		}
-
-	}, {
-		"path": "pages/quick/quick",
-		"style": {
-			"titleNView": "",
-			"navigationStyle": "custom"
-		}
-
-	}, {
-		"path": "pages/my/my",
-		"style": {
-			"titleNView": "",
-			"navigationStyle": "custom"
-		}
-
-	}, {
-		"path": "pages/monosyllable/monosyllable",
-		"style": {
-			"titleNView": "",
-			"navigationStyle": "custom"
-		}
-
-	}],
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8",
-		"app-plus": {
-			"background": "#F8F8F8"
-		}
-	},
-	"tabBar": {
-		"iconfontSrc": "static/iconfont.ttf",
-		"backgroundColor": "#ffffff",
-		"color": "#444444",
-		"selectedColor": "#444444",
-		"borderStyle": "#ffffff",
-		"list": [{
-				"pagePath": "pages/index/index",
-				"text": "测试",
-				"iconfont": {
-					"text": "\ue73b",
-					"selectedText": "\ue65f",
-					"fontSize": "17px",
-					"color": "#999999",
-					"selectedColor": "#1D74FB"
-				}
-			},
-			{
-				"pagePath": "pages/my/my",
-				"text": "我的",
-				"iconfont": {
-					"text": "\ue8bb",
-					"selectedText": "\ue8c6",
-					"fontSize": "17px",
-					"color": "#999999",
-					"selectedColor": "#1D74FB"
-				}
-			}
-		]
-	}
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "titleNView": "",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/login/login",
+      "style": {
+        "titleNView": "",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/quick/quick",
+      "style": {
+        "titleNView": "",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/my/my",
+      "style": {
+        "titleNView": "",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/monosyllable/monosyllable",
+      "style": {
+        "titleNView": "",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/multisyllable/multisyllable",
+      "style": {
+        "titleNView": "",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/article/article",
+      "style": {
+        "titleNView": "",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/titles/titles",
+      "style": {
+        "titleNView": "",
+        "navigationStyle": "custom"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "app-plus": {
+      "background": "#F8F8F8"
+    }
+  },
+  "tabBar": {
+    "iconfontSrc": "static/iconfont.ttf",
+    "backgroundColor": "#ffffff",
+    "color": "#444444",
+    "selectedColor": "#444444",
+    "borderStyle": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "测试",
+        "iconfont": {
+          "text": "\ue73b",
+          "selectedText": "\ue65f",
+          "fontSize": "17px",
+          "color": "#999999",
+          "selectedColor": "#1D74FB"
+        }
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconfont": {
+          "text": "\ue8bb",
+          "selectedText": "\ue8c6",
+          "fontSize": "17px",
+          "color": "#999999",
+          "selectedColor": "#1D74FB"
+        }
+      }
+    ]
+  }
 }

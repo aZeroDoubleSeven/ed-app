@@ -1,6 +1,6 @@
 <template>
   <view>
-    <u-navbar title="单音节测试题" :safeAreaInsetTop="true" placeholder fixed>
+    <u-navbar title="多音节测试题" :safeAreaInsetTop="true" placeholder fixed>
       <view @click="onBack" class="u-nav-slot" slot="left">
         <u-icon name="arrow-left" size="19"></u-icon>
       </view>
@@ -8,8 +8,8 @@
     <view class="container">
       <view class="examination-wrap">
         <view class="section monosyllable">
-          <view class="monosyllable-content">
-            <view class="b" v-for="i in monosyllableList">
+          <view class="multisyllable-content">
+            <view class="b" v-for="i in multisyllableList">
               <view class="w">{{ i }}</view>
             </view>
           </view>
@@ -28,7 +28,6 @@
         <voiceui v-if="showVoiceUi" />
         <text v-if="!showVoiceUi">开始录制</text>
       </view>
-
       <view class="submit-btn" @click="onSubmit">提交</view>
     </view>
 
@@ -51,14 +50,13 @@ export default {
       show: false,
       model: "test",
       voicePath: "",
-      monosyllableList:
-        "的去太天涯是啊从弹出层容器用于展示弹窗信息提示等内容支持上下左右和中部弹出组件只提供容器内部内容由用户自定义吧你吗啊是的发给和",
+      multisyllableList: ["滋长", "滋长", "滋长", "滋长", "滋长"],
     };
   },
   components: { voiceui, popup },
   methods: {
     onSubmit() {
-      this.toPage("/pages/multisyllable/multisyllable");
+      this.toPage("/pages/article/article");
     },
     toPage(url) {
       if (url) {
@@ -67,7 +65,6 @@ export default {
         });
       }
     },
-
     open() {
       this.show = true;
     },
@@ -106,7 +103,6 @@ export default {
 
     playVoice() {
       console.log("播放录音");
-
       if (this.voicePath) {
         innerAudioContext.src = this.voicePath;
         innerAudioContext.play();
@@ -139,7 +135,7 @@ export default {
         margin-bottom: 32rpx;
       }
     }
-    .monosyllable-content {
+    .multisyllable-content {
       box-sizing: border-box;
       padding: 0 12rpx;
       position: relative;
@@ -148,7 +144,7 @@ export default {
       display: flex;
       flex-wrap: wrap;
       .b {
-        width: 66rpx;
+        width: 133rpx;
         height: 66rpx;
         box-sizing: border-box;
         display: flex;

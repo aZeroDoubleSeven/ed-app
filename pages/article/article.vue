@@ -1,6 +1,6 @@
 <template>
   <view>
-    <u-navbar title="单音节测试题" :safeAreaInsetTop="true" placeholder fixed>
+    <u-navbar title="朗读短文" :safeAreaInsetTop="true" placeholder fixed>
       <view @click="onBack" class="u-nav-slot" slot="left">
         <u-icon name="arrow-left" size="19"></u-icon>
       </view>
@@ -8,11 +8,7 @@
     <view class="container">
       <view class="examination-wrap">
         <view class="section monosyllable">
-          <view class="monosyllable-content">
-            <view class="b" v-for="i in monosyllableList">
-              <view class="w">{{ i }}</view>
-            </view>
-          </view>
+          <rich-text :nodes="articleContent"></rich-text>
         </view>
 
         <view class="tip">大声清晰朗读能活得更精准的分数哦</view>
@@ -36,7 +32,7 @@
   </view>
 </template>
 
-<script>
+  <script>
 const recorderManager = uni.getRecorderManager();
 const innerAudioContext = uni.createInnerAudioContext();
 innerAudioContext.autoplay = true;
@@ -51,14 +47,13 @@ export default {
       show: false,
       model: "test",
       voicePath: "",
-      monosyllableList:
-        "的去太天涯是啊从弹出层容器用于展示弹窗信息提示等内容支持上下左右和中部弹出组件只提供容器内部内容由用户自定义吧你吗啊是的发给和",
+      articleContent: `我常常遗憾 终有一日，村子里来了一个天文学家。他在我家门前路过，突然发现了这块石头，眼光立即就拉直了。他再没有走去，就住了下来：以后又来了好些人，都说这是一块陨石，从天上落下来已经有二三百年了，是一件了不起的东西，不久便来了车，小心翼翼地将它运走了。我家门前那块丑石呢：它黑黝黝地卧在那里，牛似的模样：谁也不知道是什么时候留在这里的，谁也不去理会它。只是麦收时节，门前摊了麦子，奶奶总是要说：“这块丑石，多碍地面哟，啥时把它搬走吧。 它不像汉白玉那样的细腻，可以凿下刻字雕花；也不像大青石那样的光滑，可以供来浣纱捶布。它静静地卧在那里，院边的槐荫没有庇覆它，花儿也不再在它身边生长，荒草便繁衍出来，枝蔓上下。慢慢地，它竟锈上了绿苔、黑斑。我们这些做孩子的，也讨厌起它来，曾合伙要搬走它，但力气又不足：虽时时咒骂它，嫌弃它，也无可奈何，只好任它留在那里去了。这使我们都很惊奇！这又怪又丑的石头，原来是天上的呢！它补过天，在天上发过热、闪过光，我们的先祖或许仰望过它，它给了他们光明、向往、憧憬；而它落下来了。在污土里，荒草里，一躺就是几百年了！`,
     };
   },
   components: { voiceui, popup },
   methods: {
     onSubmit() {
-      this.toPage("/pages/multisyllable/multisyllable");
+      this.toPage("/pages/titles/titles");
     },
     toPage(url) {
       if (url) {
@@ -123,7 +118,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+  <style lang="scss" scoped>
 .container {
   position: relative;
   margin-top: 40rpx;

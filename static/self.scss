@@ -1,0 +1,36 @@
+.btn-sm-default {
+  box-sizing: border-box;
+  width: 252rpx;
+  height: 68rpx;
+  line-height: 66rpx;
+  font-size: 28rpx;
+  color: #1d74fb;
+  background: #ffffff;
+  text-align: center;
+  border-radius: 34px;
+  border: 1rpx solid #1d74fb;
+  background-color: #ffffff;
+  &:active {
+    color: #ffffff;
+    border: 1rpx solid #024cbf;
+    background-color: #024cbf;
+  }
+}
+
+.btn-sm-primary {
+  box-sizing: border-box;
+  width: 252rpx;
+  height: 68rpx;
+  line-height: 66rpx;
+  font-size: 28rpx;
+  color: #ffffff;
+  background: #1d74fb;
+  text-align: center;
+  border-radius: 34px;
+  border: 1rpx solid #1d74fb;
+  background-color: #1d74fb;
+  &:active {
+    border: 1rpx solid #024cbf;
+    background-color: #024cbf;
+  }
+}
