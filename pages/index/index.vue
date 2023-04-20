@@ -99,7 +99,7 @@ export default {
   position: relative;
   width: 100%;
   box-sizing: border-box;
-  padding: 127rpx 28rpx 0rpx 28rpx;
+  padding: 147rpx 28rpx 0rpx 28rpx;
 
   .top-wrap {
     position: absolute;

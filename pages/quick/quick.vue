@@ -174,7 +174,7 @@ export default {
 <style lang="scss" scoped>
 .quick-container {
   position: relative;
-  margin-top: 128rpx;
+  margin-top: 40rpx;
   padding: 0 28rpx;
 
   .info-wrap {
