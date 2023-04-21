@@ -55,6 +55,13 @@
         "titleNView": "",
         "navigationStyle": "custom"
       }
+    },
+    {
+      "path": "pages/report/report",
+      "style": {
+        "titleNView": "",
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {

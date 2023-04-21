@@ -15,6 +15,21 @@
           </view>
         </view>
 
+        <view class="page-body">
+          <view
+            class="page-section page-section-gap"
+            style="text-align: center"
+          >
+            <!-- <audio
+              style="text-align: left"
+              :src="current.src"
+              :name="current.name"
+              :action="audioAction"
+              controls
+            ></audio> -->
+          </view>
+        </view>
+
         <view class="tip">大声清晰朗读能活得更精准的分数哦</view>
       </view>
     </view>
@@ -47,6 +62,15 @@ import popup from "../../components/popup.vue";
 export default {
   data() {
     return {
+      current: {
+        poster: "https://web-assets.dcloud.net.cn/unidoc/zh/music-a.png",
+        name: "致爱丽丝",
+        author: "暂无",
+        src: "https://bjetxgzv.cdn.bspapp.com/VKCEYUGU-hello-uniapp/2cc220e0-c27a-11ea-9dfb-6da8e309e0d8.mp3",
+      },
+      audioAction: {
+        method: "pause",
+      },
       showVoiceUi: false,
       show: false,
       model: "test",

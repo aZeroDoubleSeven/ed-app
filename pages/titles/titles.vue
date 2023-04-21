@@ -86,7 +86,7 @@ export default {
   methods: {
     onSubmit() {
       if (this.step === 1) {
-        this.toPage("/pages/multisyllable/multisyllable");
+        this.toPage("/pages/report/report");
       }
     },
 
@@ -262,9 +262,10 @@ export default {
   }
 
   .voice-btn {
-    width: 90%;
+    width: calc(100% - 186rpx);
     text-align: center;
     color: #ffffff;
+    background-color: #1d74fb;
     font-size: 28rpx;
     letter-spacing: 4rpx;
   }

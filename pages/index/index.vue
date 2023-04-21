@@ -1,7 +1,7 @@
 <template>
   <view class="container">
     <view class="top-wrap">
-      <view class="title">普通话测验</view>
+      <view class="title">普通话学习宝典</view>
       <image class="icon-pu" src="../../static/index_top_bg_pu.png"></image>
     </view>
 
@@ -26,7 +26,9 @@
         </view>
       </view>
       <view class="btn-wrap">
-        <view class="test-log">测试报告</view>
+        <view class="test-log" @click="toPage('/pages/report/report')"
+          >测试报告</view
+        >
         <view class="test-quick" @click="toPage('/pages/quick/quick')"
           >快速测试</view
         >
@@ -56,7 +58,7 @@
       <view class="normal-box">
         <view class="box-title">常规训练</view>
         <view class="train-lists">
-          <view class="item words">单词练习</view>
+          <view class="item words" @click="handlerNormal">单词练习</view>
           <view class="item expressions">词语练习</view>
           <view class="item article">短文练习</view>
           <view class="item article-title">命题练习</view>
@@ -74,13 +76,83 @@
         </view>
       </view>
     </view>
+    <u-popup :show="show" @close="close" @open="open" round="10">
+      <view class="popup-style">
+        <view class="top">
+          <view class="title"> 常规训练 </view>
+          <view class="icon-close" @click="close">
+            <u-icon name="close" color="#1d74fb"></u-icon>
+          </view>
+        </view>
+
+        <view class="tabs">
+          <view
+            class="tab-item"
+            :class="[current === 0 ? 'active' : '']"
+            @click="onChange(0)"
+          >
+            <view class="nums">100个</view>
+            <view class="name">适中强度</view>
+          </view>
+          <view
+            class="tab-item"
+            :class="[current === 1 ? 'active' : '']"
+            @click="onChange(1)"
+            ><view class="nums">100个</view>
+            <view class="name">中等强度</view>
+          </view>
+          <view
+            class="tab-item"
+            :class="[current === 2 ? 'active' : '']"
+            @click="onChange(2)"
+            ><view class="nums">100个</view>
+            <view class="name">高强度</view>
+          </view>
+        </view>
+
+        <u-cell-group class="group">
+          <u-cell title="测试是否显示拼音">
+            <u-switch slot="right-icon" v-model="normalTest.hasPiny"></u-switch>
+          </u-cell>
+          <u-cell title="是否自动播放音频">
+            <u-switch
+              slot="right-icon"
+              v-model="normalTest.hasAudio"
+            ></u-switch>
+          </u-cell>
+          <u-cell title="测试结果显示">
+            <u-switch
+              slot="right-icon"
+              v-model="normalTest.hasReport"
+            ></u-switch>
+          </u-cell>
+          <u-cell title="预计训练时长">
+            <view slot="right-icon">{{ normalTest.time }}分钟</view>
+          </u-cell>
+        </u-cell-group>
+
+        <view class="random-btn-wrap">
+          <view @click="handlerRandom" class="random-btn">开始常规训练</view>
+        </view>
+      </view>
+    </u-popup>
   </view>
 </template>
 
 <script>
 export default {
   data() {
-    return {};
+    return {
+      show: false,
+      current: 0,
+      normalTest: {
+        level: 0,
+        hasPiny: false,
+        hasAudio: false,
+        hasReport: false,
+        time: 7,
+      },
+    };
   },
   methods: {
     toPage(url) {
@@ -89,6 +161,20 @@ export default {
           url: url,
         });
       }
+    },
+
+    onChange(i) {
+      this.current = i;
+      this.normalTest.level = i;
+    },
+    handlerNormal() {
+      this.open();
+    },
+    open() {
+      this.show = true;
+    },
+    close() {
+      this.show = false;
     },
   },
 };
@@ -342,6 +428,143 @@ export default {
         &:active {
           background-color: #cbeae7;
         }
+      }
+    }
+  }
+}
+
+.popup-style {
+  position: relative;
+  width: 100%;
+  height: 1116rpx;
+  border-radius: 10rpx;
+  overflow-y: scroll;
+
+  .top {
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    z-index: 99;
+    .title {
+      height: 100rpx;
+      line-height: 100rpx;
+      text-align: center;
+      color: #444444;
+      font-size: 28rpx;
+    }
+
+    .icon-close {
+      position: absolute;
+      display: block;
+      width: 100rpx;
+      height: 100rpx;
+      top: 0rpx;
+      right: 0rpx;
+      line-height: 100rpx;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .tabs {
+    position: relative;
+    box-sizing: border-box;
+    margin-top: 15rpx;
+    padding: 0 30rpx;
+    display: flex;
+    justify-content: space-between;
+
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      margin-bottom: 40rpx;
+      width: 224rpx;
+      height: 148rpx;
+      background-color: #1d74fb;
+      box-shadow: 0px 2rpx 10rpx 1rpx rgba(0, 0, 0, 0.1);
+      border-radius: 20rpx;
+
+      .nums {
+        height: 32rpx;
+        line-height: 32rpx;
+        font-size: 32rpx;
+        color: #ffffff;
+        margin-bottom: 24rpx;
+        letter-spacing: 2rpx;
+      }
+
+      .name {
+        height: 28rpx;
+        line-height: 28rpx;
+        font-size: 28rpx;
+        color: #ffffff;
+        letter-spacing: 4rpx;
+      }
+    }
+
+    .active {
+      background-color: #024cbf;
+      box-shadow: 0px 4rpx 6rpx 2rpx rgba(118, 114, 114, 0.7);
+    }
+  }
+
+  .subject-lists {
+    position: relative;
+    .item {
+      box-sizing: border-box;
+      padding: 0 36rpx;
+      position: relative;
+      width: 100%;
+      height: 100rpx;
+      line-height: 100rpx;
+      display: flex;
+      justify-content: space-between;
+      &:active {
+        background: #d9d8d8;
+      }
+      .name {
+        font-size: 28rpx;
+        color: #444444;
+      }
+
+      .score {
+        font-size: 20rpx;
+        color: #999999;
+      }
+    }
+  }
+
+  .group {
+    padding: 0 30rpx;
+  }
+
+  .random-btn-wrap {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    padding-bottom: 20rpx;
+    z-index: 99;
+
+    background-color: #ffffff;
+    .random-btn {
+      position: relative;
+      width: 630rpx;
+      margin: 0 auto;
+      height: 80rpx;
+      letter-spacing: 4rpx;
+      line-height: 80rpx;
+      border-radius: 40rpx;
+      text-align: center;
+      color: #ffffff;
+      background-color: #1d74fb;
+      &:active {
+        color: #ffffff;
+        background: #024cbf;
       }
     }
   }

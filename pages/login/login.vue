@@ -51,8 +51,8 @@
       </view>
     </view>
 
-    <view class="sigin-btn" @click="onSubmit">登录</view>
-    <view class="login-btn">免费注册</view>
+    <view class="sigin-btn" @click="onSubmit">登录 / 注册</view>
+    <!-- <view class="login-btn">免费注册</view> -->
 
     <view class="file-wrap">
       <checkbox-group @change="onChange">

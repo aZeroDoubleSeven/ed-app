@@ -1,5 +1,5 @@
 <template>
-  <view class="sound-icon disabled">
+  <view class="sound-icon">
     <view class="sound-wave">
       <view class="bar"></view>
       <view class="bar"></view>

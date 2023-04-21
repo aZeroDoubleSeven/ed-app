@@ -4,26 +4,42 @@
       <view @click="onBack" class="u-nav-slot" slot="left">
         <u-icon name="arrow-left" size="19"></u-icon>
       </view>
-
-      <view @click="open" class="u-nav-slot slot-right" slot="right">
-        更换试卷
-      </view>
     </u-navbar>
     <view class="quick-container">
       <view class="info-wrap">
-        <view class="item">
-          <view class="nums">88</view>
-          <view class="title">平均分</view>
-        </view>
-        <view class="item">
-          <view class="nums">2</view>
-          <view class="title">测试次数</view>
+        <view class="total"> 83.63 </view>
+        <view class="level">二级乙等</view>
+        <view class="more">
+          <view class="item">
+            <view class="nums">88.32</view>
+            <view class="title">单音节</view>
+          </view>
+          <view class="item">
+            <view class="nums">88.32</view>
+            <view class="title">多音节</view>
+          </view>
+          <view class="item">
+            <view class="nums">88.32</view>
+            <view class="title">朗读短文</view>
+          </view>
+          <view class="item">
+            <view class="nums">88.32</view>
+            <view class="title">命题说话</view>
+          </view>
         </view>
       </view>
 
       <view class="examination-wrap">
         <view class="section monosyllable">
-          <view class="title">一、读单音节字词</view>
+          <view class="title"
+            >一、读单音节字词
+
+            <view class="tips">
+              <view class="err">红色错读</view>
+              <view class="war">橘色不准</view>
+              <view class="score">81.83分</view>
+            </view>
+          </view>
           <view class="monosyllable-content">
             <view class="b" v-for="i in monosyllableList">
               <view class="w">{{ i }}</view>
@@ -32,7 +48,14 @@
         </view>
 
         <view class="section multisyllable">
-          <view class="title">二、读多音节字词</view>
+          <view class="title"
+            >二、读多音节字词
+            <view class="tips">
+              <view class="err">红色错读</view>
+              <view class="war">橘色不准</view>
+              <view class="score">81.83分</view>
+            </view>
+          </view>
           <view class="multisyllable-content">
             <view class="b" v-for="i in multisyllableList">
               <view class="w">{{ i }}</view>
@@ -41,14 +64,26 @@
         </view>
 
         <view class="section article-content">
-          <view class="title">三、朗读短文</view>
-          <u-read-more class="article" :toggle="true" showHeight="200">
-            <rich-text :nodes="articleContent"></rich-text>
-          </u-read-more>
+          <view class="title"
+            >三、朗读短文
+            <view class="tips">
+              <view class="err">红色错读</view>
+              <view class="war">橘色不准</view>
+              <view class="score">81.83分</view>
+            </view>
+          </view>
+          <rich-text class="article" :nodes="articleContent"></rich-text>
         </view>
 
         <view class="section titles">
-          <view class="title">四、命题说话</view>
+          <view class="title"
+            >四、命题说话
+            <view class="tips">
+              <view class="err">红色错读</view>
+              <view class="war">橘色不准</view>
+              <view class="score">81.83分</view>
+            </view>
+          </view>
           <view class="titles-content">
             <view class="item" v-for="(i, index) in titleList">
               {{ index + 1 }}. {{ i }}
@@ -57,53 +92,6 @@
         </view>
       </view>
     </view>
-
-    <view class="options-btn-wrap">
-      <view class="trues">全真测试</view>
-      <view class="quick" @click="toPage('/pages/monosyllable/monosyllable')"
-        >快速测试</view
-      >
-    </view>
-
-    <!-- <u-modal
-      :show="show"
-      @confirm="confirm"
-      @cancel="OnExit"
-      ref="uModal"
-      :showCancelButton="true"
-      confirmText="继续测试"
-      cancelText="退出"
-    >
-      <view class="slot-content">
-        <view class="text-center">确认现在退出考试？</view>
-        <view>若选择继续测试将重考本题</view>
-      </view>
-    </u-modal> -->
-
-    <u-popup :show="show" @close="close" @open="open" round="10">
-      <view class="popup-style">
-        <view class="top">
-          <view class="title"> 选择试题 </view>
-          <view class="icon-close" @click="close">
-            <u-icon name="close" color="#1d74fb"></u-icon>
-          </view>
-        </view>
-        <view class="subject-lists">
-          <view
-            class="item"
-            @click="setSubject(i)"
-            v-for="i in subjectLists"
-            :key="i.name"
-          >
-            <view class="name">{{ i.name }}</view>
-            <view class="score">{{ i.status ? i.score : "未测试" }}</view>
-          </view>
-        </view>
-        <view class="random-btn-wrap">
-          <view @click="handlerRandom" class="random-btn">随机试题</view>
-        </view>
-      </view>
-    </u-popup>
   </view>
 </template>
 
@@ -111,7 +99,7 @@
 export default {
   data() {
     return {
-      title: "真题模拟1",
+      title: "测试报告",
       show: false,
       subjectLists: [
         { name: "模拟考试题1", status: false, score: "" },
@@ -175,36 +163,114 @@ export default {
   position: relative;
   margin-top: 40rpx;
   padding: 0 28rpx;
-
   .info-wrap {
     position: relative;
+    box-sizing: border-box;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32rpx 72rpx 0;
     width: 100%;
-    height: 148rpx;
-    background-color: #1d74fb;
-    box-shadow: 0px 2rpx 10rpx 1rpx rgba(0, 0, 0, 0.1);
+    height: 360rpx;
     border-radius: 20rpx;
     margin-bottom: 40rpx;
-    .item {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      justify-content: center;
-      align-items: center;
+    box-shadow: 0px 2rpx 10rpx 1rpx rgba(0, 0, 0, 0.1);
+    background-color: #1d74fb;
+
+    .total {
+      width: 100rpx;
+      height: 100rpx;
+      line-height: 100rpx;
+      font-size: 32rpx;
+      color: #444444;
+      border-radius: 50%;
+      text-align: center;
+      background: #ffffff;
+      margin-bottom: 30rpx;
+    }
+
+    .level {
+      height: 28rpx;
+      line-height: 28rpx;
+      font-size: 28rpx;
       color: #ffffff;
-      letter-spacing: 3.5rpx;
+      margin-bottom: 38rpx;
+    }
+
+    .more {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      .item {
+        display: flex;
+        flex-direction: column;
+        flex: 0 0 120rpx;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff;
+        letter-spacing: 3.5rpx;
+
+        .nums {
+          height: 32rpx;
+          line-height: 32rpx;
+          font-size: 32rpx;
+          margin-bottom: 20rpx;
+        }
+        .title {
+          height: 28rpx;
+          line-height: 28rpx;
+          font-size: 28rpx;
+        }
+      }
     }
   }
 
   .examination-wrap {
+    padding-bottom: 20rpx;
     .section {
       margin-bottom: 40rpx;
       .title {
+        position: relative;
         color: #444444;
         font-size: 32rpx;
         height: 32rpx;
         line-height: 32rpx;
         margin-bottom: 32rpx;
+
+        .tips {
+          position: absolute;
+          display: flex;
+          width: auto;
+          right: 0;
+          top: 0;
+          .err,
+          .war {
+            // box-sizing: border-box;
+            width: 124rpx;
+            height: 32rpx;
+            line-height: 32rpx;
+            font-size: 20rpx;
+            text-align: center;
+            background: #ffffff;
+            border-radius: 29rpx;
+          }
+          .err {
+            border: 1rpx solid #ff5e57;
+            color: #ff5e57;
+            margin-right: 18rpx;
+          }
+
+          .war {
+            border: 1rpx solid #febc2e;
+            color: #febc2e;
+            margin-right: 16rpx;
+          }
+
+          .score {
+            color: #999999;
+            font-size: 20rpx;
+          }
+        }
       }
     }
     .monosyllable-content,
@@ -217,8 +283,8 @@ export default {
       display: flex;
       flex-wrap: wrap;
       .b {
-        width: 66rpx;
-        height: 66rpx;
+        width: 110rpx;
+        height: 94rpx;
         box-sizing: border-box;
         display: flex;
         align-items: center;
@@ -234,13 +300,17 @@ export default {
     .multisyllable-content {
       .b {
         width: 133rpx;
+        height: 100rpx;
       }
     }
-
     .article {
       box-sizing: border-box;
-      border: 1rpx solid #999999;
-      padding: 16rpx;
+      font-size: 28rpx;
+
+      div {
+        padding: 16rpx;
+        border: 1rpx solid #999999;
+      }
 
       /deep/ .u-read-more__content {
         font-size: 28rpx;
@@ -249,7 +319,7 @@ export default {
     }
 
     .titles {
-      margin-bottom: 120rpx;
+      margin-bottom: 40rpx;
     }
 
     /deep/ .u-read-more__toggle {
@@ -399,8 +469,4 @@ export default {
     }
   }
 }
-
-// .text-center {
-//   text-align: center;
-// }
 </style>
